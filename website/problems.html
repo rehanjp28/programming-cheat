@@ -112,3 +112,81 @@
     </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programming Cheat - Save Solved Problems</title>
+    <style>
+        /* Maintain your existing CSS styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+        }
+        main {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            background-color: #333; /* Dark background for the form area */
+        }
+        label, input, button {
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+        }
+        input, button {
+            padding: 8px;
+        }
+        button {
+            cursor: pointer;
+            background-color: #0066CC;
+            color: white;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Programming Cheat</h1>
+        <p>Save the problems you've solved!</p>
+    </header>
+
+    <main>
+        <form id="solvedProblemForm">
+            <label for="problemID">Problem ID:</label>
+            <input type="text" id="problemID" name="problemID" required>
+
+            <label for="solutionDescription">Solution Description:</label>
+            <textarea id="solutionDescription" name="solutionDescription" required></textarea>
+
+            <button type="button" onclick="saveSolvedProblem()">Save Solved Problem</button>
+        </form>
+    </main>
+
+    <script>
+        function saveSolvedProblem() {
+            var problemID = document.getElementById('problemID').value;
+            var solutionDescription = document.getElementById('solutionDescription').value;
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "save_solved_problem.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    alert("Problem saved successfully!");
+                    // Optionally clear the form or handle the response further
+                }
+            };
+            xhr.send("problemID=" + encodeURIComponent(problemID) + "&solutionDescription=" + encodeURIComponent(solutionDescription));
+        }
+    </script>
+</body>
+</html>
+
